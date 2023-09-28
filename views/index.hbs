@@ -3,22 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <title>App</title>
+    <style>
+      .webcam {
+        width: 400px;
+        height: 400px;
+        border: 2px solid black;
+      }
+      .webcam-container {
+         width: 400px;
+        height: 400px;
+        border: 12px solid black;
+      }
+    </style>
   </head>
   <body>
     <h1>Video App</h1>
-    <video id="Webcam">
+    <div class="webcam-container">
+         <video autoplay="true" id="Webcam" class="webcam">
 	</video>
+    </div>
+ 
   </body>
-  <script>const video = document.querySelector('#WebCam');
-    window.navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
-            video.srcObject = stream;
-            video.onloadedmetadata = (e) => {
-                video.play();
-            };
-        })
-        .catch( () => {
-            alert('You have give browser the permission to run Webcam and mic ;( ');
-        });
+  <script>
+    let video = document.querySelector('.webcam');
+    console.log(video)
+    if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+} else {
+  console.log('GetuSermedia not supported')
+}
   </script>
 </html>
