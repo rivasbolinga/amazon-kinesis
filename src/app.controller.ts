@@ -1,12 +1,18 @@
-import { Controller, Get, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get, Param } from '@nestjs/common';
+import { AppService } from './app.service';
 
-@Controller()
+@Controller('viewer')
 export class AppController {
-  constructor() {}
+  constructor(private readonly appService: AppService) {}
 
-  @Get()
-  root(@Res() res: Response) {
-    return res.render('index');
-  }
+// @Get('getSignalingChannelEndpoints/:channelARN')
+//   async getSignalingChannelEndpoints(
+//     @Param('channelARN') channelARN: string,
+//   ): Promise<any> {
+//     try {
+//       return await this.appService.getSignalingChannelEndpoints(channelARN);
+//     } catch (error) {
+//       throw new Error('Failed to get signaling channel endpoints');
+//     }
+//   }
 }
